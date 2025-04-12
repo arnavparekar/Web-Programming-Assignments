@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .slider-container {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        output {
+            font-weight: bold;
+            color: blue;
+        }
+        .total-container {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Feedback</h1>
+    <form>
+        <div class="slider-container">
+            <label for="quality">Quality:</label><br>
+            <input type="range" id="quality" name="quality" min="0" max="10" value="5" oninput="updateTotal()">
+            <output id="qualityOutput">5</output>
+        </div>
+
+        <div class="slider-container">
+            <label for="value">Value for Money:</label><br>
+            <input type="range" id="value" name="value" min="0" max="10" value="5" oninput="updateTotal()">
+            <output id="valueOutput">5</output>
+        </div>
+
+        <div class="slider-container">
+            <label for="usability">Usability:</label><br>
+            <input type="range" id="usability" name="usability" min="0" max="10" value="5" oninput="updateTotal()">
+            <output id="usabilityOutput">5</output>
+        </div>
+
+        <div class="total-container">
+            Total Feedback Score: <output id="totalOutput">15</output>
+        </div>
+    </form>
+
+    <script>
+        function updateTotal() {
+            const quality = parseInt(document.getElementById("quality").value);
+            const value = parseInt(document.getElementById("value").value);
+            const usability = parseInt(document.getElementById("usability").value);
+            document.getElementById("qualityOutput").value = quality;
+            document.getElementById("valueOutput").value = value;
+            document.getElementById("usabilityOutput").value = usability;
+            const total = quality + value + usability;
+            document.getElementById("totalOutput").value = total;
+        }
+    </script>
+</body>
+</html>

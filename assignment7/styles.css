@@ -1,0 +1,55 @@
+body {
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20241126/pngtree-golden-retriever-catching-frisbee-at-sunset-autumn-dog-stock-photo-image_16637875.jpg'); /* Add your background image URL */
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.rainbow {
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.description {
+    column-count: 2;
+    column-gap: 20px;
+    line-height: 30pt;
+    margin: 20px;
+    
+}
+
+.svg-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.ball-animation {
+    animation: zigzag 3s infinite ease-in-out; /* Zigzag playful motion */
+}
+
+@keyframes zigzag {
+    0% {
+        transform: translate(0px, 0px) rotate(0deg) scale(1); /* Start at original position */
+    }
+    20% {
+        transform: translate(50px, -30px) rotate(30deg) scale(1.1); /* Move diagonally up-right */
+    }
+    40% {
+        transform: translate(-50px, -60px) rotate(-45deg) scale(1); /* Move diagonally up-left */
+    }
+    60% {
+        transform: translate(70px, 30px) rotate(60deg) scale(1.2); /* Move diagonally down-right */
+    }
+    80% {
+        transform: translate(-30px, 50px) rotate(-30deg) scale(0.9); /* Move diagonally down-left */
+    }
+    100% {
+        transform: translate(0px, 0px) rotate(0deg) scale(1); /* Return to original position */
+    }
+}

@@ -1,0 +1,499 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Citizen Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+        .error {
+            color: red;
+            font-size: 0.8em;
+        }
+        #eligibilityStatus, #greetingMessage {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form id="citizenLoginForm">
+        <h2>Citizen Login Form</h2>
+        
+        <label for="aadharId">AADHAR ID (12 digits):</label>
+        <input type="text" id="aadharId" name="aadharId" required>
+        <div id="aadharError" class="error"></div>
+
+        <label for="voterId">Voter ID (Pattern: [ABC1234#]):</label>
+        <input type="text" id="voterId" name="voterId" required>
+        <div id="voterIdError" class="error"></div>
+
+        <label for="personName">Person Name (Max 25 characters):</label>
+        <input type="text" id="personName" name="personName" required>
+        <div id="personNameError" class="error"></div>
+
+        <label for="dob">Date of Birth (DDMMYYYY):</label>
+        <input type="text" id="dob" name="dob" required>
+        <div id="dobError" class="error"></div>
+
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" onfocus="generatePassword()" readonly>
+    </form>
+
+    <script>
+        const aadharInput = document.getElementById('aadharId');
+        const voterIdInput = document.getElementById('voterId');
+        const personNameInput = document.getElementById('personName');
+        const dobInput = document.getElementById('dob');
+        const passwordInput = document.getElementById('password');
+
+        const aadharError = document.getElementById('aadharError');
+        const voterIdError = document.getElementById('voterIdError');
+        const personNameError = document.getElementById('personNameError');
+        const dobError = document.getElementById('dobError');
+
+        function validateAadharId() {
+            const aadharRegex = /^\d{12}$/;
+            if (!aadharRegex.test(aadharInput.value)) {
+                aadharError.textContent = 'AADHAR ID must be exactly 12 digits';
+                return false;
+            }
+            aadharError.textContent = '';
+            return true;
+        }
+
+        function validateVoterId() {
+            const voterIdRegex = /^[A-Z]{2}[A-Z]\d{4}#$/;
+            if (!voterIdRegex.test(voterIdInput.value)) {
+                voterIdError.textContent = 'Voter ID must follow the pattern [ABC1234#]';
+                return false;
+            }
+            voterIdError.textContent = '';
+            return true;
+        }
+
+        function validatePersonName() {
+            if (personNameInput.value.length > 25) {
+                personNameError.textContent = 'Person Name must be max 25 characters';
+                return false;
+            }
+            personNameError.textContent = '';
+            return true;
+        }
+
+        function validateDOB() {
+            const dobRegex = /^\d{2}\d{2}\d{4}$/;
+            if (!dobRegex.test(dobInput.value)) {
+                dobError.textContent = 'Date of Birth must be in DDMMYYYY format';
+                return false;
+            }
+            dobError.textContent = '';
+            return true;
+        }
+
+        function countVowels(name) {
+            return (name.match(/[aeiou]/gi) || []).length;
+        }
+
+        function generatePassword() {
+            if (validateVoterId() && validatePersonName()) {
+                const ab = voterIdInput.value.slice(0, 2).toLowerCase();
+                const C = voterIdInput.value[2].toUpperCase();
+                const n = countVowels(personNameInput.value);
+                const DD = dobInput.value.slice(0, 2);
+                const YY = dobInput.value.slice(6);
+                
+                passwordInput.value = `${ab}${C}${n}*#${DD}${YY}`;
+            }
+        }
+
+        function checkEligibility() {
+            const currentYear = new Date().getFullYear();
+            const birthYear = parseInt(dobInput.value.slice(4, 8));
+            const age = currentYear - birthYear;
+
+            const eligibilityStatus = document.createElement('div');
+            eligibilityStatus.id = 'eligibilityStatus';
+
+            if (age >= 18) {
+                eligibilityStatus.textContent = 'You are eligible to vote';
+                document.body.appendChild(createSubmitButton());
+            } else {
+                eligibilityStatus.textContent = 'STAY HEALTHY';
+            }
+            
+            document.body.appendChild(eligibilityStatus);
+        }
+
+        function createSubmitButton() {
+            const submitButton = document.createElement('button');
+            submitButton.textContent = 'Submit';
+            submitButton.onclick = submitForm;
+            return submitButton;
+        }
+
+        function submitForm() {
+            const currentTime = new Date().getHours();
+            let greeting = '';
+
+            if (currentTime < 12) {
+                greeting = 'Good Morning';
+            } else if (currentTime < 16) {
+                greeting = 'Good Noon';
+            } else {
+                greeting = 'Good Evening';
+            }
+
+            const greetingMessage = document.createElement('div');
+            greetingMessage.id = 'greetingMessage';
+            greetingMessage.textContent = `${greeting}, ${personNameInput.value}!`;
+            
+            document.body.appendChild(greetingMessage);
+        }
+
+        // Add eligibility button
+        const eligibilityButton = document.createElement('button');
+        eligibilityButton.textContent = 'Check Eligibility';
+        eligibilityButton.onclick = () => {
+            if (validateAadharId() && validateVoterId() && validatePersonName() && validateDOB()) {
+                checkEligibility();
+            }
+        };
+        document.body.appendChild(eligibilityButton);
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Smiley Face</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      text-align: center;
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    #smileyCanvas {
+      border: 2px solid #333;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .instructions {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Interactive Smiley Face</h1>
+    <canvas id="smileyCanvas" width="300" height="300"></canvas>
+    <div class="instructions">
+      <p>Hover over the smiley to change its color!</p>
+    </div>
+  </div>
+
+  <script>
+    // Get the canvas element
+    const canvas = document.getElementById('smileyCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Smiley face properties
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 100;
+    
+    // Animation and interaction variables
+    let faceColor = '#FFD700'; // Initial color (gold)
+    let isHovering = false;
+    let eyesOpen = true;
+    let eyeBlinkInterval;
+    let colorChangeInterval;
+    
+    // Colors array for hover effect
+    const colors = [
+      '#FFD700', // Gold
+      '#FF6347', // Tomato
+      '#4682B4', // Steel Blue
+      '#2E8B57', // Sea Green
+      '#9370DB', // Medium Purple
+      '#FF69B4', // Hot Pink
+      '#FFA500'  // Orange
+    ];
+    
+    // Function to draw the smiley face
+    function drawSmiley() {
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw the face (circle)
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
+      ctx.fillStyle = faceColor;
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#333';
+      ctx.stroke();
+      
+      // Draw the smile (arc)
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius * 0.6, 0, Math.PI, false);
+      ctx.lineWidth = 6;
+      ctx.stroke();
+      
+      // Draw the eyes (two circles or lines when blinking)
+      if (eyesOpen) {
+        // Left eye
+        ctx.beginPath();
+        ctx.arc(centerX - radius * 0.4, centerY - radius * 0.2, radius * 0.12, 0, Math.PI * 2, false);
+        ctx.fillStyle = '#333';
+        ctx.fill();
+        
+        // Right eye
+        ctx.beginPath();
+        ctx.arc(centerX + radius * 0.4, centerY - radius * 0.2, radius * 0.12, 0, Math.PI * 2, false);
+        ctx.fillStyle = '#333';
+        ctx.fill();
+      } else {
+        // Left eye (blinking - line)
+        ctx.beginPath();
+        ctx.moveTo(centerX - radius * 0.5, centerY - radius * 0.2);
+        ctx.lineTo(centerX - radius * 0.3, centerY - radius * 0.2);
+        ctx.lineWidth = 6;
+        ctx.stroke();
+        
+        // Right eye (blinking - line)
+        ctx.beginPath();
+        ctx.moveTo(centerX + radius * 0.3, centerY - radius * 0.2);
+        ctx.lineTo(centerX + radius * 0.5, centerY - radius * 0.2);
+        ctx.lineWidth = 6;
+        ctx.stroke();
+      }
+    }
+    
+    // Function to start the eye blinking
+    function startBlinking() {
+      // Clear any existing interval
+      if (eyeBlinkInterval) {
+        clearInterval(eyeBlinkInterval);
+      }
+      
+      // Set a new interval for blinking
+      eyeBlinkInterval = setInterval(() => {
+        eyesOpen = false;
+        drawSmiley();
+        
+        // Open eyes after a short delay
+        setTimeout(() => {
+          eyesOpen = true;
+          drawSmiley();
+        }, 300);
+      }, 3000); // Blink every 3 seconds
+    }
+    
+    // Function to start color changing when hovering
+    function startColorChanging() {
+      let colorIndex = 0;
+      
+      if (colorChangeInterval) {
+        clearInterval(colorChangeInterval);
+      }
+      
+      colorChangeInterval = setInterval(() => {
+        colorIndex = (colorIndex + 1) % colors.length;
+        faceColor = colors[colorIndex];
+        drawSmiley();
+      }, 500); // Change color every 500ms
+    }
+    
+    // Function to stop color changing
+    function stopColorChanging() {
+      if (colorChangeInterval) {
+        clearInterval(colorChangeInterval);
+        faceColor = '#FFD700'; // Reset to initial color
+        drawSmiley();
+      }
+    }
+    
+    // Add event listeners for hover effect
+    canvas.addEventListener('mouseenter', () => {
+      isHovering = true;
+      startColorChanging();
+    });
+    
+    canvas.addEventListener('mouseleave', () => {
+      isHovering = false;
+      stopColorChanging();
+    });
+    
+    // Initialize the smiley face
+    drawSmiley();
+    startBlinking();
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Stack Hover Effect</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            border: 5px solid #333;
+            overflow: hidden;
+        }
+
+        .image-stack {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-stack img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease, z-index 0.3s ease;
+            z-index: 1;
+        }
+
+        .image-stack img:hover {
+            transform: scale(1.2);
+            z-index: 10; /* Brings the hovered image to the front */
+        }
+
+        .image-details {
+            position: absolute;
+            top: 10px;
+            left: 320px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .image-stack img:hover + .image-details {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,1" alt="Nature Image 1" data-title="Nature Image 1">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,2" alt="Nature Image 2" data-title="Nature Image 2">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,3" alt="Nature Image 3" data-title="Nature Image 3">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,4" alt="Nature Image 4" data-title="Nature Image 4">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,5" alt="Nature Image 5" data-title="Nature Image 5">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,6" alt="Nature Image 6" data-title="Nature Image 6">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,7" alt="Nature Image 7" data-title="Nature Image 7">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,8" alt="Nature Image 8" data-title="Nature Image 8">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,9" alt="Nature Image 9" data-title="Nature Image 9">
+            <div class="image-details"></div>
+        </div>
+        <div class="image-stack">
+            <img src="https://source.unsplash.com/300x400/?nature,10" alt="Nature Image 10" data-title="Nature Image 10">
+            <div class="image-details"></div>
+        </div>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll(".image-stack img");
+        images.forEach(img => {
+            img.addEventListener("mouseover", function() {
+                const detailsBox = this.nextElementSibling;
+                detailsBox.innerText = this.getAttribute("data-title");
+                detailsBox.style.display = "block";
+            });
+
+            img.addEventListener("mouseout", function() {
+                this.nextElementSibling.style.display = "none";
+            });
+        });
+    </script>
+
+</body>
+</html>

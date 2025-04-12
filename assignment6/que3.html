@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Favourite Singer</title>
+    <style>
+        .myphoto {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* makes it a circle */
+            border: 2px solid #ff6600; /* your favorite color */
+        }
+
+        h2 {
+            animation: colorFontAnimation 5s infinite;
+            text-align: center;
+        }
+
+        @keyframes colorFontAnimation {
+            0% {
+                color: red;
+                font-size: 20px;
+            }
+            25% {
+                color: green;
+                font-size: 24px;
+            }
+            50% {
+                color: blue;
+                font-size: 28px;
+            }
+            75% {
+                color: purple;
+                font-size: 24px;
+            }
+            100% {
+                color: red;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>My Favourite Singer</h2>
+    <div style="text-align: center;">
+        <img src="image.webp" alt="My Favourite Singer" class="myphoto">
+    </div>
+</body>
+</html>

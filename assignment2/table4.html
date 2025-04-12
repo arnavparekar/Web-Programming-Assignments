@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #expenses-table {
+            display: none; 
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 80%;
+            text-align: center;
+        }
+
+        #expenses-table th, #expenses-table td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        #expenses-table th {
+            background-color: #edd6d6;
+            font-weight: bold;
+        }
+
+        #expenses-table caption {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .row1 { background-color: red; } 
+        .row2 { background-color: rgb(190, 12, 133); } 
+        .row3 { background-color: #5644f5; } 
+        .row4 { background-color: #057e29; } 
+        .row5 {background-color: #edd6d6; }
+
+    </style>
+    <script>
+        function showTable() {
+            document.getElementById('expenses-table').style.display = 'table';
+        }
+    </script>
+</head>
+<body>
+    <h1>Expenses and Income Table</h1>
+    <p>
+        Click the hyperlink <a href="#" onclick="showTable()">Expenses</a> to display the table below.
+    </p>
+    <table id="expenses-table">
+        <tr>
+            <th rowspan="2">Year</th>
+            <th rowspan="2">Quarter</th>
+            <th colspan="2">Expenses</th>
+            <th colspan="2">Income</th>
+        </tr>
+        <tr>
+            <th>Quetta</th>
+            <th>Dubai</th>
+            <th>Quetta</th>
+            <th>Dubai</th>
+        </tr>
+        <tr class="row5">
+            <td rowspan="5">2022</td>
+        </tr>
+        <tr class="row1">
+            
+            <td>1</td>
+            <td>1,900</td>
+            <td>8,650</td>
+            <td>9,000</td>
+            <td>7,780</td>
+        </tr>
+        <tr class="row2">
+            <td>2</td>
+            <td>2,230</td>
+            <td>8,650</td>
+            <td>8,500</td>
+            <td>8,670</td>
+        </tr>
+        <tr class="row3">
+            <td>3</td>
+            <td>4,000</td>
+            <td>8,650</td>
+            <td>9,900</td>
+            <td>9,870</td>
+        </tr>
+        <tr class="row4">
+            <td>4</td>
+            <td>2,200</td>
+            <td>8,650</td>
+            <td>9,800</td>
+            <td>9,900</td>
+        </tr>
+        <tr class="row5">
+            <td rowspan="5">2022</td>
+        </tr>
+        <tr class="row1">
+            <td>1</td>
+            <td>7,780</td>
+            <td>8,650</td>
+            <td>7,780</td>
+            <td>9,000</td>
+        </tr>
+        <tr class="row2">
+            <td>2</td>
+            <td>8,670</td>
+            <td>8,650</td>
+            <td>8,670</td>
+            <td>8,500</td>
+        </tr>
+        <tr class="row3">
+            <td>3</td>
+            <td>9,870</td>
+            <td>8,650</td>
+            <td>9,870</td>
+            <td>9,900</td>
+        </tr>
+        <tr class="row4">
+            <td>4</td>
+            <td>9,900</td>
+            <td>8,650</td>
+            <td>9,900</td>
+            <td>9,800</td>
+        </tr>
+        <tr>
+            <td class="row5">2013</td>
+            <td colspan="5">****</td>
+        </tr>
+    </table>
+</body>
+</html>

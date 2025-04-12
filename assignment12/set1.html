@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Customer Login</h2>
+    <form id="loginForm">
+        <label for="customerID">Customer ID:</label>
+        <input type="text" id="customerID" required oninput="validateCustomerID()">
+        
+        <label for="customerName" class="hidden">Customer Name:</label>
+        <input type="text" id="customerName" class="hidden" required oninput="validateCustomerName()">
+        
+        <label for="password" class="hidden">Generated Password:</label>
+        <input type="text" id="password" class="hidden" readonly onclick="generatePassword()">
+        
+        <button type="submit" id="submitBtn" class="hidden">Submit</button>
+        <button type="button" id="cancelBtn" class="hidden" onclick="resetForm()">Cancel</button>
+    </form>
+    
+    <p id="greetingMessage"></p>
+</div>
+
+<script>
+    function validateCustomerID() {
+        const customerID = document.getElementById('customerID').value;
+        const pattern = /^[ABC897#!®#]+$/;
+        if (pattern.test(customerID)) {
+            document.getElementById('customerName').classList.remove('hidden');
+            document.querySelector('label[for="customerName"]').classList.remove('hidden');
+        } else {
+            document.getElementById('customerName').classList.add('hidden');
+            document.querySelector('label[for="customerName"]').classList.add('hidden');
+        }
+    }
+
+    function validateCustomerName() {
+        const customerName = document.getElementById('customerName').value;
+        if (customerName.length > 0 && customerName.length <= 25) {
+            document.getElementById('password').classList.remove('hidden');
+            document.querySelector('label[for="password"]').classList.remove('hidden');
+        } else {
+            document.getElementById('password').classList.add('hidden');
+            document.querySelector('label[for="password"]').classList.add('hidden');
+        }
+    }
+
+    function generatePassword() {
+        const customerName = document.getElementById('customerName').value;
+        if (customerName.length > 0) {
+            let lastLetter = customerName.slice(-1).toUpperCase();
+            let nameLength = String(customerName.length).padStart(2, '0');
+            let specialChar = "#";
+            let date = new Date();
+            let mmdd = String(date.getMonth() + 1).padStart(2, '0') + String(date.getDate()).padStart(2, '0');
+            let firstTwoLetters = customerName.slice(0, 2).toLowerCase();
+
+            let password = lastLetter + nameLength + specialChar + mmdd + firstTwoLetters;
+            document.getElementById('password').value = password;
+
+            document.getElementById('submitBtn').classList.remove('hidden');
+            document.getElementById('cancelBtn').classList.remove('hidden');
+        }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let date = new Date();
+        let hours = date.getHours();
+        let greeting = '';
+
+        if (hours < 12) {
+            greeting = "Good Morning";
+        } else if (hours >= 12 && hours < 16) {
+            greeting = "Good Noon";
+        } else {
+            greeting = "Good Evening";
+        }
+        document.getElementById('greetingMessage').innerText = greeting;
+    });
+
+    function resetForm() {
+        document.getElementById('loginForm').reset();
+        document.getElementById('customerName').classList.add('hidden');
+        document.querySelector('label[for="customerName"]').classList.add('hidden');
+        document.getElementById('password').classList.add('hidden');
+        document.querySelector('label[for="password"]').classList.add('hidden');
+        document.getElementById('submitBtn').classList.add('hidden');
+        document.getElementById('cancelBtn').classList.add('hidden');
+        document.getElementById('greetingMessage').innerText = '';
+    }
+</script>
+
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Movement</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        canvas {
+            border: 2px solid black;
+            background-color: #cce7ff; 
+        }
+    </style>
+</head>
+<body>
+
+<h2>Move the Car using Arrow Keys</h2>
+<canvas id="gameCanvas" width="500" height="300"></canvas>
+
+<script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    let carX = 200;
+    let carY = 200;
+    const carWidth = 50;
+    const carHeight = 30;
+    const speed = 5;
+
+    function drawCar() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "red";
+        ctx.fillRect(carX, carY, carWidth, carHeight);
+        ctx.fillStyle = "black";
+        ctx.fillRect(carX + 10, carY - 15, carWidth - 20, 15);
+        ctx.fillStyle = "gray";
+        ctx.beginPath();
+        ctx.arc(carX + 10, carY + carHeight, 8, 0, Math.PI * 2);
+        ctx.arc(carX + carWidth - 10, carY + carHeight, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "lightblue";
+        ctx.fillRect(carX + 12, carY - 12, 10, 10);
+        ctx.fillRect(carX + 28, carY - 12, 10, 10);
+    }
+
+    function moveCar(event) {
+        if (event.key === "ArrowRight" && carX + carWidth < canvas.width) {
+            carX += 2*speed;
+        } else if (event.key === "ArrowLeft" && carX > 0) {
+            carX -= 2*speed;
+        } else if (event.key === "ArrowUp" && carY > 0) {
+            carY -= 2*speed;
+        } else if (event.key === "ArrowDown" && carY + carHeight + 8 < canvas.height) {
+            carY += 2*speed;
+        }
+        drawCar();
+    }
+    drawCar();
+    window.addEventListener("keydown", moveCar);
+</script>
+</body>
+</html> -->
